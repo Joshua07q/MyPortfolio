@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind component;
+@tailwind utilities;
+#butt{
+   width: 250px;
+   height: 70px;
+   color: white;
+   font-size: xx-large;
+   animation-duration: 1s;
+   animation-name: quanck;
+   animation-delay: 4ms;
+   animation-iteration-count: infinite;
+   border-radius: 10px;
+   font-weight: bolder;
+}
+@keyframes quanck{
+   50%{
+     transform: rotateX(30deg);
+      transform: rotateY(30deg);
+      transform: rotate3d(30deg);
+   }
+}
