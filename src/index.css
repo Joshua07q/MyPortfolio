@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* ── Scroll progress bar ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: #3b82f6;
+  z-index: 100;
+  transition: width 0.05s linear;
+}
+
+/* ── Section reveal on scroll ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Role ticker ── */
+@keyframes role-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) skewX(-2deg);
+    filter: blur(6px);
+  }
+  40% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  60% {
+    transform: translateY(-1px) skewX(0.5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) skewX(0deg);
+    filter: blur(0);
+  }
+}
+
+.role-tick {
+  display: inline-block;
+  animation: role-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Stagger children ── */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: role-enter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger > *:nth-child(8) { animation-delay: 0.4s; }
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 99px; }
+.dark ::-webkit-scrollbar-thumb { background: #27272a; }
+
+/* ── Selection color ── */
+::selection {
+  background: #3b82f6;
+  color: white;
+}
+
+/* ── Project card hover ── */
+.card-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.08);
+}
+
+.dark .card-lift:hover {
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Smooth underline link ── */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+}
+
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* ── Blinking cursor ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: "▌";
+  animation: blink 1s step-end infinite;
+  color: #3b82f6;
+  margin-left: 1px;
+}
