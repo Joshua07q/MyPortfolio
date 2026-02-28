@@ -42,7 +42,7 @@ export const roles = [
   "Hackathon Menace",
   "Open-Source Contributor",
   "LLM Whisperer",
-  "Rust Beginner (honest)",
+  "Rust Enthusiast",
   "Full-Stack When Needed",
   "Freelance Overthinker",
 ];
